@@ -1,6 +1,6 @@
 from htmlnode import LeafNode, HTMLnode, ParentNode
 from block_markdown import block_to_block_type, markdown_to_blocks, BlockType
-from textnode import TextNode
+from textnode import TextNode, TextType
 from inline_markdown import text_to_textnodes
 
 def markdown_to_html_node(markdown):
@@ -60,9 +60,9 @@ def create_quote_block(block):
 
 def create_code_block(block):
     text = block.strip("```").strip(" \n")
-    node = TextNode(text, "code")
+    node = TextNode(text, TextType.CODE)
     leaf = TextNode.text_node_to_html_node(node)
-    return ParentNode("pre", [ParentNode("code", [leaf])])
+    return ParentNode("pre", [leaf])
 
 def create_unordered_block(block):
     text = block.split("\n")
